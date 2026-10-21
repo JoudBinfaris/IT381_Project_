@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EventListActivity"
+    tools:ignore="HardcodedText,Overdraw,ButtonStyle">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt; Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="Available Events"
+            android:textColor="#0F172A"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Load JSON Button -->
+    <Button
+        android:id="@+id/btnLoadJson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Load Events from JSON" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#E2E8F0" />
+
+    <!-- Search Input -->
+    <EditText
+        android:id="@+id/etSearchEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search events by name or location..."
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="14sp" />
+
+    <!-- Category Filters -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/filterChipsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/chipAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All" />
+
+            <Button
+                android:id="@+id/chipWorkshop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Workshops" />
+
+            <Button
+                android:id="@+id/chipConference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conferences" />
+
+            <Button
+                android:id="@+id/chipExhibition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exhibitions" />
+
+            <Button
+                android:id="@+id/chipSeminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seminars" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Status & Events List -->
+    <TextView
+        android:id="@+id/tvEventListStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="Tap 'Load Events from JSON' above."
+        android:textColor="#475569"
+        android:textSize="13sp" />
+
+    <ListView
+        android:id="@+id/lvEvents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

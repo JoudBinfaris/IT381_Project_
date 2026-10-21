@@ -1,0 +1,52 @@
+[
+  {
+    "id": 101,
+    "name": "Mobile AI & Machine Learning Workshop",
+    "date": "2026-11-05",
+    "time": "10:00 AM",
+    "location": "Auditorium A, Building 31",
+    "description": "Hands-on workshop exploring on-device artificial intelligence, Gemini models, and mobile inference techniques for Android.",
+    "category": "Workshop",
+    "organizer": "IT Department"
+  },
+  {
+    "id": 102,
+    "name": "Wireless & IoT Tech Summit",
+    "date": "2026-11-12",
+    "time": "01:30 PM",
+    "location": "Convention Center - Hall 2",
+    "description": "Industry leaders discuss 5G, Wi-Fi 7, ultra-wideband, and Bluetooth Low Energy innovations in modern smart devices.",
+    "category": "Conference",
+    "organizer": "Wireless Computing Group"
+  },
+  {
+    "id": 103,
+    "name": "Annual Student Tech Exhibition",
+    "date": "2026-11-18",
+    "time": "09:00 AM",
+    "location": "Innovation Hub Plaza",
+    "description": "Showcase of cutting-edge senior projects, robotics demonstrations, and mobile computing applications developed by students.",
+    "category": "Exhibition",
+    "organizer": "Student Affairs Council"
+  },
+  {
+    "id": 104,
+    "name": "Cybersecurity & Network Defense Forum",
+    "date": "2026-11-25",
+    "time": "11:00 AM",
+    "location": "Engineering Hall 105",
+    "description": "Interactive seminar focusing on mobile device security, secure socket communication, and wireless privacy protocols.",
+    "category": "Seminar",
+    "organizer": "Cybersecurity Club"
+  },
+  {
+    "id": 105,
+    "name": "Smart Campus Hackathon 2026",
+    "date": "2026-12-02",
+    "time": "08:30 AM",
+    "location": "CS Labs Wing B",
+    "description": "A 24-hour coding sprint building smart campus solutions, attendance tracking, and peer-to-peer wireless services.",
+    "category": "Workshop",
+    "organizer": "ACM Student Chapter"
+  }
+]

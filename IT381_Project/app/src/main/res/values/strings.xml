@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Smart Event Companion</string>
+    <string name="browse_events">Browse Events (JSON)</string>
+    <string name="registered_events">Registered Events (SQLite)</string>
+    <string name="bluetooth_attendance">Bluetooth Attendance</string>
+    <string name="file_storage">File Storage &amp; Reports</string>
+    <string name="search_hint">Search events by title or location&#8230;</string>
+</resources>
