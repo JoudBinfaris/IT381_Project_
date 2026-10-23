@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -91,14 +95,10 @@ public class FileStorageActivity extends AppCompatActivity {
         }
         cursor.close();
 
-        boolean success = FileHelper.writeToFile(this, FileHelper.ATTENDANCE_FILE, sb.toString());
-        if (success) {
-            tvWriteStatus.setVisibility(View.VISIBLE);
-            tvWriteStatus.setText("✓ Successfully written to " + FileHelper.ATTENDANCE_FILE);
-            Toast.makeText(this, "Attendance written to file!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Failed to write attendance report", Toast.LENGTH_SHORT).show();
-        }
+        writeToFile(FileHelper.ATTENDANCE_FILE, sb.toString());
+        tvWriteStatus.setVisibility(View.VISIBLE);
+        tvWriteStatus.setText("✓ Successfully written to " + FileHelper.ATTENDANCE_FILE);
+        Toast.makeText(this, "Attendance written to file!", Toast.LENGTH_SHORT).show();
     }
 
     private void exportEventsToFile() {
@@ -133,31 +133,56 @@ public class FileStorageActivity extends AppCompatActivity {
         }
         cursor.close();
 
-        boolean success = FileHelper.writeToFile(this, FileHelper.EVENTS_SUMMARY_FILE, sb.toString());
-        if (success) {
-            tvWriteStatus.setVisibility(View.VISIBLE);
-            tvWriteStatus.setText("✓ Successfully written to " + FileHelper.EVENTS_SUMMARY_FILE);
-            Toast.makeText(this, "Events written to file!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Failed to write events report", Toast.LENGTH_SHORT).show();
-        }
+        writeToFile(FileHelper.EVENTS_SUMMARY_FILE, sb.toString());
+        tvWriteStatus.setVisibility(View.VISIBLE);
+        tvWriteStatus.setText("✓ Successfully written to " + FileHelper.EVENTS_SUMMARY_FILE);
+        Toast.makeText(this, "Events written to file!", Toast.LENGTH_SHORT).show();
     }
 
     private void readReportFromFile(String filename, String title) {
-        if (!FileHelper.fileExists(this, filename)) {
+        File file = new File(this.getFilesDir(), filename);
+        if (!file.exists()) {
             Toast.makeText(this, "File not found: " + filename + ". Write file first!", Toast.LENGTH_LONG).show();
             tvReportTitle.setText(title + " (File not found)");
             tvReportContent.setText("No file exists yet. Please tap the Write button above to create this file.");
             return;
         }
 
-        String content = FileHelper.readFromFile(this, filename);
-        if (content != null) {
-            tvReportTitle.setText("Reading File: " + filename);
-            tvReportContent.setText(content);
-            Toast.makeText(this, "File read successfully (" + filename + ")", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Failed to read file: " + filename, Toast.LENGTH_SHORT).show();
+        String content = readFile(filename);
+        tvReportTitle.setText("Reading File: " + filename);
+        tvReportContent.setText(content);
+        Toast.makeText(this, "File read successfully (" + filename + ")", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Writes content to an internal storage file using FileOutputStream.
+     * Implemented using Lab 3 slide code pattern.
+     */
+    private void writeToFile(String fileName, String content) {
+        try {
+            File file = new File(this.getFilesDir(), fileName);
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(content.getBytes());
+            outputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Reads content from an internal storage file using FileInputStream and byte buffer.
+     * Implemented using Lab 3 slide code pattern.
+     */
+    private String readFile(String fileName) {
+        try {
+            File file = new File(this.getFilesDir(), fileName);
+            byte[] buffer = new byte[(int) file.length()];
+            FileInputStream inputStream = new FileInputStream(file);
+            inputStream.read(buffer);
+            inputStream.close();
+            return new String(buffer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

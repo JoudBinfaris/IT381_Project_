@@ -173,15 +173,36 @@ Stores participant attendance recorded via Bluetooth:
 
 ### 6. File Storage Functionality
 
-The application uses Android Internal Storage (`Context.openFileOutput` and `Context.openFileInput`) through `FileHelper.java`.
+The application uses Android Internal Storage (`File`, `FileOutputStream`, and `FileInputStream`) directly within `FileStorageActivity.java` (and helper methods in `FileHelper.java`), matching the standard Lab 3 internal storage code patterns.
+
+#### File Storage Location:
+Files are stored securely in internal storage:
+* **Device Explorer Path:** `data > data > com.example.it381_project > files`
 
 #### Operations Implemented:
-1. **Export Attendance Summary (`attendance_summary.txt`):**
-   Reads all attendance records from SQLite, formats them into a structured text report with header, timestamp, and numbered list, and writes to private storage.
-2. **Export Registered Events (`events_summary.txt`):**
-   Reads all registered events from SQLite and saves a clean summary file.
-3. **Read and Display Report:**
-   Uses `FileInputStream` and `BufferedReader` to read the file contents line-by-line and display them directly on screen in `FileStorageActivity`.
+1. **Writing to Internal Storage (`writeToFile`):**
+   * Creates a file in the app's internal files directory:
+     ```java
+     File file = new File(this.getFilesDir(), fileName);
+     FileOutputStream outputStream = new FileOutputStream(file);
+     outputStream.write(content.getBytes());
+     outputStream.close();
+     ```
+   * **Export Attendance Summary (`attendance_summary.txt`):** Reads all attendance records from SQLite, formats them into a structured text report with header, timestamp, and numbered list, and writes to internal storage.
+   * **Export Registered Events (`events_summary.txt`):** Reads all registered events from SQLite and saves a clean summary file.
+   * Displays immediate feedback using Android Toast messages (`Toast.makeText(this, "...", Toast.LENGTH_SHORT).show()`).
+
+2. **Reading from Internal Storage (`readFile`):**
+   * Reads file contents directly into a byte buffer:
+     ```java
+     File file = new File(this.getFilesDir(), fileName);
+     byte[] buffer = new byte[(int) file.length()];
+     FileInputStream inputStream = new FileInputStream(file);
+     inputStream.read(buffer);
+     inputStream.close();
+     return new String(buffer);
+     ```
+   * **Display Report:** Loads and displays the text report inside a monospace `TextView` in `FileStorageActivity` with immediate Toast notification.
 
 ---
 

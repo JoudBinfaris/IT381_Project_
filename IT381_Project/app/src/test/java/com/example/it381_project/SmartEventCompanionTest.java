@@ -75,4 +75,33 @@ public class SmartEventCompanionTest {
         assertEquals("name", DatabaseHelper.col1);
         assertEquals("attendance_table", DatabaseHelper.TABLE_ATTENDANCE);
     }
+
+    @Test
+    public void testFileStorageReadWriteLogic() throws Exception {
+        java.io.File tempDir = java.nio.file.Files.createTempDirectory("test_files").toFile();
+        String fileName = "sample_test.txt";
+        String sampleContent = "Hello World! Lab 3 file storage.";
+
+        // Write to file pattern from slide
+        java.io.File file = new java.io.File(tempDir, fileName);
+        java.io.FileOutputStream outputStream = new java.io.FileOutputStream(file);
+        outputStream.write(sampleContent.getBytes());
+        outputStream.close();
+
+        assertTrue(file.exists());
+        assertEquals((long) sampleContent.getBytes().length, file.length());
+
+        // Read from file pattern from slide
+        byte[] buffer = new byte[(int) file.length()];
+        java.io.FileInputStream inputStream = new java.io.FileInputStream(file);
+        inputStream.read(buffer);
+        inputStream.close();
+        String result = new String(buffer);
+
+        assertEquals(sampleContent, result);
+
+        // Cleanup
+        file.delete();
+        tempDir.delete();
+    }
 }
